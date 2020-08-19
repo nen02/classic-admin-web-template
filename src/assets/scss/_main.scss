@@ -1,0 +1,25 @@
+#main {
+    height: 100%;
+    transition: all 300ms ease-in;
+}
+
+#main.slide {
+    transform: translate(230px, 0);
+}
+
+@include media-breakpoint($sm) {
+    #main.slide {
+        transform: none;
+        margin-left: 230px;
+    }
+}
+
+@include media-breakpoint($md) {
+    #main {
+        margin-left: 230px;
+    }
+
+    #main.slide {
+        margin-left: 50px;
+    }
+}

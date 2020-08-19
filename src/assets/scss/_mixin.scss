@@ -1,0 +1,15 @@
+@mixin d-flex($horizontal: center, $vertical: center) {
+    display: flex;
+    justify-content: $horizontal;
+    align-items: $vertical;
+}
+
+@mixin media-breakpoint($px) {
+    @media screen and (min-width: $px) {
+        @content
+    }
+}
+
+@mixin border {
+    border: 1px solid yellow;
+}
