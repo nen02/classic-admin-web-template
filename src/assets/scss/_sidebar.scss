@@ -109,9 +109,7 @@
 
     .sidebar-nav .nav-items,
     .sidebar-nav .nav-items .tree-view .tree-view-menu {
-        margin: 0;
-        padding-left: 0;
-        list-style-type: none;
+        @include reset-ul();
 
         .header {
             color: #4B646F;

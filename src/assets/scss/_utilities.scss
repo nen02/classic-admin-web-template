@@ -1,19 +1,43 @@
-[class$="-success"] { 
+.label-success { 
     background-color: $c_success;
 }
 
-[class$="-primary"] { 
+.label-primary { 
     background-color: $c_primary;
 }
 
-[class$="-danger"] { 
+.label-danger { 
     background-color: $c_danger;
 }
 
-[class$="-info"] { 
+.label-info { 
     background-color: $c_info;
 }
 
-[class$="-warning"] { 
+.label-warning { 
     background-color: $c_warning;
+}
+
+.text-success { 
+    color: $c_success;
+}
+
+.text-primary { 
+    color: $c_primary;
+}
+
+.text-danger { 
+    color: $c_danger;
+}
+
+.text-info { 
+    color: $c_info;
+}
+
+.text-warning { 
+    color: $c_warning;
+}
+
+.text-center {
+    text-align: center;
 }

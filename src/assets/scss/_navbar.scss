@@ -32,9 +32,7 @@
 
     .nav-items {
         height: 100%;
-        list-style-type: none;
-        padding-left: 0;
-        margin: 0;
+        @include reset-ul();
         @include d-flex(flex-end);
 
         .nav-item {
@@ -49,6 +47,7 @@
                 font-family: $source_sans_pro;
                 font-size: .835rem;
                 outline: none;
+                position: relative;
 
                 &:hover, &:focus {
                     background-color: $hover_bg;
@@ -62,9 +61,50 @@
                     display: none;
                     margin-left: 5px;
                 }
+
+                .label {
+                    position: absolute;
+                    top: 6px;
+                    right: 5px;
+                    padding: 0 4px;
+                    border-radius: 3px;
+                    font-size: 0.735rem;
+                    font-weight: 700;
+                }
             }
         }
         
+        .nav-item.dropdown {
+            // @include border;
+            position: relative;
+            .dropdown-menu {
+                // @include border;
+                @include reset-ul();
+                position: absolute;
+                width: $dropdownMdSize;
+                top: calc(100% + 5px);
+                background-color: $c_white;
+                border: 1px solid $c_light_border;
+                border-radius: 3px;
+                right: 0;
+                box-shadow: $shadow;
+
+                .dropdown-header,
+                .dropdown-footer,
+                .dropdown-body {
+                    padding: 0.4em 1em;
+                }
+
+                .dropdown-header {
+                    border-bottom: 1px solid $c_divider;
+                }
+
+                .dropdown-footer {
+                    border-top: 1px solid $c_divider;
+                }
+            }
+        }
+
         .nav-item.user-acc {
             .nav-link img {
                 height: 26px;

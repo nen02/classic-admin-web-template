@@ -6,10 +6,15 @@
 
 @mixin media-breakpoint($px) {
     @media screen and (min-width: $px) {
-        @content
+        @content;
     }
 }
+@mixin reset-ul() {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
 
-@mixin border {
+@mixin border() {
     border: 1px solid yellow;
 }

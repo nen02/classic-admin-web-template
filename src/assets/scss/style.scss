@@ -2,17 +2,7 @@
 @import './mixin';
 @import './keyframes';
 
-body {
-    margin: 0;
-    font-family: $lato;
-    overflow-x: hidden;
-    background-color: #ECF0F5;
-    padding-top: 44px;  
-}
-
-p {
-    margin: 0;
-}
+@import './resetter';
 
 @import './navbar';
 @import './sidebar';

@@ -5,15 +5,17 @@ $source_sans_pro: 'Source Sans Pro', sans-serif;
 $lato: 'Lato', sans-serif;
 
 // colors
-$c_primary: #337ab7;
-$c_success: #5cb85c;
-$c_warning: #f0ad4e;
-$c_info: #5bc0de;
-$c_danger: #d9534f;
-$c_secondary: #6b757d;
-$c_light: #f8f9fa;
-$c_white: #fff;
-$c_dark: #343a40;
+$c_primary: #337AB7;
+$c_success: #5CB85C;
+$c_warning: #F0AD4E;
+$c_info: #5BC0DE;
+$c_danger: #D9534F;
+$c_secondary: #6B757D;
+$c_light: #F8F9Fa;
+$c_white: #FFF;
+$c_dark: #343A40;
+$c_divider: #E9E9E9;
+$c_light_border: #E5E5E5;
 
 // bg colors
 $hover_bg: #5554;
@@ -29,3 +31,9 @@ $navbarBgColor: #3C8EBE;
 
 $sidebarWidth: 230px;
 $sidebarBgColor: #222D32;
+
+$shadow: 0 0 8px rgb(216, 209, 209);
+
+$dropdownLgSize: 420px;
+$dropdownMdSize: 320px;
+$dropdownSmSize: 220px;
