@@ -1,0 +1,48 @@
+.label-success,
+.bg-success { 
+    background-color: $c_success;
+}
+
+.label-primary,
+.bg-primary { 
+    background-color: $c_primary;
+}
+
+.label-danger,
+.bg-danger { 
+    background-color: $c_danger;
+}
+
+.label-info,
+.bg-info { 
+    background-color: $c_info;
+}
+
+.label-warning,
+.bg-warning { 
+    background-color: $c_warning;
+}
+
+.text-success { 
+    color: $c_success;
+}
+
+.text-primary { 
+    color: $c_primary;
+}
+
+.text-danger { 
+    color: $c_danger;
+}
+
+.text-info { 
+    color: $c_info;
+}
+
+.text-warning { 
+    color: $c_warning;
+}
+
+.text-center {
+    text-align: center;
+}
