@@ -34,8 +34,8 @@
             <TreeView v-else
               :key="item.id"
               :icon="item.icon"
-              :mouseLeaveWatcher="mouseLeaveWatcher">
-              <template slot="desc" ``11a>{{ item.desc }}</template>
+              ref="treeView">
+              <template slot="desc">{{ item.desc }}</template>
               <template slot="items">
                 <TreeViewItem
                   v-for="treeItem in item.items"
@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop, Ref } from 'vue-property-decorator'
 import NavLink from '@/components/NavLink.vue'
 import TreeView from '@/components/TreeView.vue'
 import TreeViewItem from '@/components/TreeViewItem.vue'
@@ -68,11 +68,11 @@ import links from '@/data/links.ts'
 
 export default class Sidebar extends Vue {
   @Prop() isSidebarOpen!: boolean
+  @Ref() treeView!: TreeView[]
   links = links
-  mouseLeaveWatcher = false
 
   mouseLeft () {
-    this.mouseLeaveWatcher = !this.mouseLeaveWatcher
+    for (const current of this.treeView) current.closeOpenedTreeView()
   }
 }
 </script>

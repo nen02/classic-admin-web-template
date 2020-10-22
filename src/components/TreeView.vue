@@ -14,12 +14,11 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class TreeView extends Vue {
   @Prop() icon!: string
-  @Prop() mouseLeaveWatcher!: boolean
 
   isTreeViewToggled = false
   el!: HTMLUListElement
@@ -48,6 +47,10 @@ export default class TreeView extends Vue {
     }
   }
 
+  closeOpenedTreeView () {
+    if (this.isTreeViewToggled) this.toggleTreeView()
+  }
+
   mounted () {
     this.el = this.$refs.menu as HTMLUListElement
     this.el.addEventListener('transitionend', this.closeTreeView)
@@ -55,11 +58,6 @@ export default class TreeView extends Vue {
 
   get arrowRotation () {
     return this.isTreeViewToggled ? { transform: 'rotate(-90deg)' } : { transform: '' }
-  }
-
-  @Watch('mouseLeaveWatcher')
-  onMouseLeaveWatcherChanged () {
-    if (this.isTreeViewToggled) this.toggleTreeView()
   }
 }
 </script>

@@ -19,17 +19,13 @@ import Sidebar from '@/components/layouts/Sidebar.vue'
 import Main from '@/components/layouts/Main.vue'
 
 @Component({
-  name: 'App',
   components: {
     Navbar,
     Sidebar,
     Main
-  },
-  data () {
-    return {
-      isSidebarOpen: false
-    }
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  isSidebarOpen = false
+}
 </script>
