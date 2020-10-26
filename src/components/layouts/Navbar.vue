@@ -9,32 +9,14 @@
           <a href="#" class="nav-link">
             <fa icon="envelope"></fa>
             <span class="link-desc">Messages</span>
-            <span class="label label-danger">2</span>
+            <span class="label label-danger">1</span>
           </a>
-          <ul class="dropdown-menu message-dropdown">
+          <ul class="dropdown-menu menu-left menu-center-sm message-dropdown">
             <li class="dropdown-header">You have 2 unread message(s)</li>
             <li class="dropdown-body">
-              <ul class="conversations">
-                <li class="conversation">
-                  <div>A</div>
-                  <div>
-                    <p class="sender-name">ABCD EFGH</p>
-                    <p class="message">Testing purpose only</p>
-                  </div>
-                  <div>
-                    <span><fa icon="clock"></fa> 7:56 pm</span>
-                  </div>
-                </li>
-                <li class="conversation">
-                  <div>B</div>
-                  <div></div>
-                  <div></div>
-                </li>
-                <li class="conversation">
-                  <div>C</div>
-                  <div></div>
-                  <div></div>
-                </li>
+              <ul class="cons">
+                <Conversation v-for="item in conversations" :key="item.id" :item="item">
+                </Conversation>
               </ul>
             </li>
             <li class="dropdown-footer"><a href="#">See All Messages</a></li>
@@ -57,9 +39,17 @@
   </div>
 </template>
 
-<script lag="ts">
+<script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import Conversation from '@/components/Conversation.vue'
+import conversations from '@/data/conversations'
 
-@Component
-export default class Navbar extends Vue {}
+@Component({
+  components: {
+    Conversation
+  }
+})
+export default class Navbar extends Vue {
+  conversations = conversations
+}
 </script>

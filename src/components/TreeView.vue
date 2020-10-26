@@ -14,17 +14,17 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
 
 @Component
 export default class TreeView extends Vue {
   @Prop() icon!: string
+  @Ref() menu!: HTMLUListElement
 
   isTreeViewToggled = false
-  el!: HTMLUListElement
 
   toggleTreeView () {
-    const el = this.el
+    const el = this.menu
     if (!this.isTreeViewToggled) {
       el.style.display = 'block'
       const tempHeight = el.clientHeight + 'px'
@@ -42,8 +42,8 @@ export default class TreeView extends Vue {
 
   closeTreeView () {
     if (!this.isTreeViewToggled) {
-      this.el.style.display = ''
-      this.el.style.height = ''
+      this.menu.style.display = ''
+      this.menu.style.height = ''
     }
   }
 
@@ -52,8 +52,7 @@ export default class TreeView extends Vue {
   }
 
   mounted () {
-    this.el = this.$refs.menu as HTMLUListElement
-    this.el.addEventListener('transitionend', this.closeTreeView)
+    this.menu.addEventListener('transitionend', this.closeTreeView)
   }
 
   get arrowRotation () {

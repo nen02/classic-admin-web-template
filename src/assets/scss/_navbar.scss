@@ -75,12 +75,14 @@
         }
         
         .nav-item.dropdown {
+            position: relative;
             .dropdown-menu {
                 @include reset-ul();
                 position: absolute;
                 width: $dropdownMdSize;
                 top: $navbarHeight + 10px;
-                right: 10px;
+                left: 50%;
+                transform: translate(-50%);
                 background-color: $c_white;
                 border: 1px solid $c_light_border;
                 border-radius: 3px;
@@ -93,6 +95,7 @@
                 }
 
                 .dropdown-header {
+                    color: #444;
                     border-bottom: 1px solid $c_divider;
                 }
 
@@ -101,69 +104,119 @@
                 }
                 
                 &.message-dropdown {
-                    display: none;
                     .dropdown-header {
-                        font-size: 0.875rem;
+                        font-size: 0.845rem;
                     }
 
                     .dropdown-body {
                         padding: 0;
-                        .conversations {
+                        .cons {
                             @include reset-ul();
-                            .conversation {
-                                @include border;
-                                height: 3em;
-                                padding: 0.4em 1em;
+                            .con {
+                                padding: 0 8px;
+                            }
+
+                            .con-link {
                                 display: flex;
-                                justify-content: center;
-                                color: rgb(31, 29, 29);
-                                // @include border();
-                                div:nth-child(1) {
-                                    // @include border;
-                                    justify-self: flex-start;
+                                align-items: center;
+                                height: 3em;
+                                padding: 0.3em 0.6em;
+                                position: relative;
+                                border-radius: 8px;
+
+                                div.prof-pic {
                                     height: 2.6em;
                                     width: 2.6em;
                                     border-radius: 50%;
                                     background-color: $c_success;
                                     text-align: center;
                                     line-height: 2.6em;
+                                    font-weight: 700;
+                                    color: $c_white;
                                 }
 
-                                div:nth-child(2) {
-                                    // @include border;
+                                img.prof-pic {
+                                    height: 2.6em;
+                                    width: 2.6em;
+                                    border-radius: 50%;
+                                    object-fit: cover;
+                                }
+
+                                .con-detail {
                                     margin-left: 0.6em;
-                                    justify-self: flex-start;
-                                    align-self: flex-start;
-                                    margin-top: 4px;
 
                                     .sender-name {
-                                        font-size: .935rem;
+                                        font-size: .885rem;
+                                        color: #050505;
                                     }
 
-                                    .message {
-                                        font-size: .735rem;
+                                    .sender-message,
+                                    .timestamp {
+                                        font-size: .765rem;
+                                        color: #65676B;
                                     }
                                 }
 
-                                div:nth-child(3) {
-                                    align-self: flex-start;
-                                    margin-top: 4px;
-                                    justify-self: flex-end;
-                                    float: right;
-                                    span {
-                                        font-size: .675rem;
-                                        color: grey;
+                                &.unseen .sender-name {
+                                    font-weight: 700;
+                                }
+
+                                &.unseen .sender-message {
+                                    font-weight: 700;
+                                    color: #1876F2;
+                                }
+
+                                a {
+                                    display: none;
+                                    margin-left: auto;
+                                    border-radius: 50%;
+                                    width: 32px;
+                                    height: 32px;
+                                    text-align: center;
+                                    background-color: #F8F8F8;
+                                    box-shadow: $straightShadow;
+                                    color: #65676B;
+                                }
+
+                                &:hover {
+                                    background-color: #E4E4E4;
+
+                                    a {
+                                        @include d-flex();
+                                        &:hover {
+                                            background-color: #FFF;
+                                            color: #5b5d61;
+                                        }
                                     }
                                 }
+                            }
+
+                            &:first-child {
+                                padding-top: 0.6em;
+                            }
+
+                            &:last-child {
+                                padding-bottom: 0.6em;
                             }
                         }
                     }
 
                     .dropdown-footer {
-                        font-size: .935rem;
+                        font-size: .785rem;
                         text-align: center;
                     }
                 }
+            }
+
+            .menu-left {
+                transform: translate(0);
+                left: auto;
+                right: 0;
+            }
+
+            .menu-right {
+                transform: translate(0);
+                left: 0;
             }
         }
 
@@ -181,5 +234,47 @@
 @include media-breakpoint($sm) {
     .navbar-nav .nav-items .nav-item .nav-link .link-desc {
         display: inline;
+    }
+
+    .navbar-nav .nav-items .nav-item.dropdown {
+        .menu-left-sm {
+            transform: translate(0);
+            left: auto;
+            right: 0;
+        }
+
+        .menu-center-sm {
+            transform: translate(-50%);
+            left: 50%;
+            right: auto;
+        }
+
+        .menu-right-sm {
+            transform: translate(0);
+            left: 0;
+            right: auto;
+        }
+    }
+}
+
+@include media-breakpoint($md) {
+    .navbar-nav .nav-items .nav-item.dropdown {
+        .menu-left-md {
+            transform: translate(0);
+            left: auto;
+            right: 0;
+        }
+
+        .menu-center-md {
+            transform: translate(-50%);
+            left: 50%;
+            right: auto;
+        }
+
+        .menu-right-md {
+            transform: translate(0);
+            left: 0;
+            right: auto;
+        }
     }
 }

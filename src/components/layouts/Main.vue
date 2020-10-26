@@ -3,7 +3,7 @@
     :class="{slide: isSidebarOpen}"
     @click="toggleSidebar"
   >
-    <div class="container   z">
+    <div class="container">
       <router-view/>
     </div>
   </div>
