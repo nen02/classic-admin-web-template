@@ -1,6 +1,6 @@
 <template>
   <li class="con">
-    <a href="#" class="con-link" :class="{ unseen: !item.seen }">
+    <a href="/" class="con-link" :class="{ unseen: !item.seen }">
       <div class="prof-pic" v-if="item.profilePicture===''">
         {{ item.conversationDetail.sender[0] }}
       </div>

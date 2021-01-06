@@ -11,7 +11,7 @@
             <span class="link-desc">Messages</span>
             <span class="label label-danger">1</span>
           </a>
-          <ul class="dropdown-menu menu-left menu-center-sm message-dropdown">
+          <ul class="dropdown-menu message-dropdown menu-center-sm menu-left-md">
             <li class="dropdown-header">You have 2 unread message(s)</li>
             <li class="dropdown-body">
               <ul class="cons">
