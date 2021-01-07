@@ -5,23 +5,30 @@
     </a>
     <nav class="navbar-nav">
       <ul class="nav-items">
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link">
-            <fa icon="envelope"></fa>
-            <span class="link-desc">Messages</span>
-            <span class="label label-danger">1</span>
-          </a>
-          <ul class="dropdown-menu message-dropdown menu-center-sm menu-left-md">
-            <li class="dropdown-header">You have 2 unread message(s)</li>
-            <li class="dropdown-body">
-              <ul class="cons">
-                <Conversation v-for="item in conversations" :key="item.id" :item="item">
-                </Conversation>
-              </ul>
-            </li>
-            <li class="dropdown-footer"><a href="#">See All Messages</a></li>
-          </ul>
-        </li>
+        <NavDropdown :icon="'envelope'" :desc="'Messages'" :classes="messageDropdownClasses">
+          <template slot="label" v-if="unreadMessages != 0">
+            <span class="label label-danger">{{ unreadMessages }}</span>
+          </template>
+          <template slot="header" v-if="unreadMessages != 0">
+            You have {{ unreadMessages }} unread message(s)
+          </template>
+          <template slot="header" v-else>
+            <h3 style="margin: 0">Messages</h3>
+          </template>
+          <template slot="body">
+            <ul class="cons">
+              <Conversation
+                v-for="item in conversations"
+                :key="item.id" :item="item"
+                @increment-unseen="unreadMessages++"
+                @decrement-unseen="unreadMessages--"
+              ></Conversation>
+            </ul>
+          </template>
+          <template slot="footer">
+            <a href="#">See All Messages</a>
+          </template>
+        </NavDropdown>
         <li class="nav-item">
           <a href="#" class="nav-link">
             <fa icon="bell"></fa>
@@ -42,14 +49,22 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Conversation from '@/components/Conversation.vue'
+import NavDropdown from '@/components/NavDropdown.vue'
 import conversations from '@/data/conversations'
 
 @Component({
   components: {
-    Conversation
+    Conversation,
+    NavDropdown
   }
 })
 export default class Navbar extends Vue {
   conversations = conversations
+  unreadMessages = 0
+  messageDropdownClasses = [
+    'message-dropdown',
+    'menu-center-sm',
+    'men-left-md'
+  ]
 }
 </script>
