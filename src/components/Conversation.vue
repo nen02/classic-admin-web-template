@@ -12,7 +12,7 @@
           <span class="timestamp"> · {{ item.conversationDetail.timestamp }}</span>
         </p>
       </div>
-      <a href="#">
+      <a href="#" @click.stop="">
         <fa icon="ellipsis-v"></fa>
       </a>
     </a>
@@ -28,7 +28,11 @@ export default class Conversation extends Vue {
     seen: boolean;
     profilePicture: string;
     userIsLastSender: boolean;
-    conversationDetail: {};
+    conversationDetail: {
+      sender: string;
+      message: string;
+      timestamp: string;
+    };
   }
 
   message (userIsLastSender: boolean, message: string): string {
