@@ -69,6 +69,7 @@
         }
 
         .query {
+            color: #CCC;
             width: 86%;
             border-radius: 4px 2px 2px 4px;
             padding-left: 0.8em;
@@ -77,6 +78,7 @@
             }
 
             &:focus {
+                color: #222;
                 background-color: $c_light;
             }
         }
