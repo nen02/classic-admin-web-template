@@ -1,6 +1,6 @@
 <template>
-  <li class="nav-item dropdown">
-    <a href="#" class="nav-link">
+  <li class="nav-item dropdown" :class="{active: isActive}">
+    <a href="#" class="nav-link" @click.prevent="toggle">
       <fa :icon="icon"></fa>
       <span class="link-desc">{{ desc }}</span>
       <slot name="label"></slot>
@@ -26,5 +26,15 @@ export default class NavDropdown extends Vue {
   @Prop() icon !: string
   @Prop() desc !: string
   @Prop() classes !: string[]
+  isActive = false
+
+  closeDropdown () {
+    this.isActive = false
+  }
+
+  toggle () {
+    if (!this.isActive) this.$emit('dropdown-opened')
+    this.isActive = !this.isActive
+  }
 }
 </script>

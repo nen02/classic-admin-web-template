@@ -76,6 +76,7 @@
         
         .nav-item.dropdown {
             .dropdown-menu {
+                display: none;
                 @include reset-ul();
                 position: absolute;
                 width: 88%;
@@ -86,6 +87,10 @@
                 border: 1px solid $c_light_border;
                 border-radius: 3px;
                 box-shadow: $shadow;
+
+                &.toggled {
+                    display: block;
+                }
 
                 .dropdown-header,
                 .dropdown-footer,
@@ -201,6 +206,12 @@
                         font-size: .785rem;
                         text-align: center;
                     }
+                }
+            }
+
+            &.active {
+                .dropdown-menu {
+                    display: block;
                 }
             }
         }

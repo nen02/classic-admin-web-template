@@ -1,7 +1,6 @@
 <template>
   <li class="nav-item">
     <router-link :to="url" class="nav-link">
-      <slot name="icon"></slot>
       <fa :icon="icon"></fa>
       <span class="link-desc">
         <slot></slot>
