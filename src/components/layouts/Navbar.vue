@@ -115,7 +115,7 @@ export default class Navbar extends Vue {
   navDropdown!: NavDropdown[]
   conversations = conversations
   unreadMessages = 0
-  conversationBodyHeight = 'auto'
+  conversationBodyHeight!: string
 
   messageDropdownClasses = [
     'message-dropdown',
@@ -125,7 +125,16 @@ export default class Navbar extends Vue {
 
   mounted () {
     this.navDropdown = [this.messageDropdown, this.notifDropdown]
-    if (this.conversations.length > 5) this.conversationBodyHeight = '60vh'
+    this.updateConversationBodyHeight()
+  }
+
+  deleteConversation () {
+    conversations.pop()
+    this.updateConversationBodyHeight()
+  }
+
+  updateConversationBodyHeight () {
+    this.conversationBodyHeight = this.conversations.length > 5 ? '60vh' : 'auto'
   }
 
   closeOpenedDropdown () {
