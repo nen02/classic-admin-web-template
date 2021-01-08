@@ -9,34 +9,38 @@
           :url="'/'"
           :icon="'home'"
         >Home</NavLink>
+
         <NavDropdown :icon="'envelope'" :desc="'Messages'"
           :classes="messageDropdownClasses" ref="messageDropdown"
           @dropdown-opened="closeOpenedDropdown">
           <template slot="label" v-if="unreadMessages != 0">
             <span class="label label-danger">{{ unreadMessages }}</span>
           </template>
+          <template slot="dropdown-content">
+            <li class="dropdown-header" v-if="unreadMessages != 0">
+              You have {{ unreadMessages }} unread message(s)
+            </li>
+            <li class="dropdown-header" v-else>
+              <h3 style="margin: 0">Messages</h3>
+            </li>
 
-          <template slot="header" v-if="unreadMessages != 0">
-            You have {{ unreadMessages }} unread message(s)
-          </template>
-          <template slot="header" v-else>
-            <h3 style="margin: 0">Messages</h3>
-          </template>
+            <li class="dropdown-body">
+              <ul class="cons">
+                <Conversation
+                  v-for="item in conversations"
+                  :key="item.id" :item="item"
+                  @increment-unseen="unreadMessages++"
+                  @decrement-unseen="unreadMessages--"
+                ></Conversation>
+              </ul>
+            </li>
 
-          <template slot="body">
-            <ul class="cons">
-              <Conversation
-                v-for="item in conversations"
-                :key="item.id" :item="item"
-                @increment-unseen="unreadMessages++"
-                @decrement-unseen="unreadMessages--"
-              ></Conversation>
-            </ul>
-          </template>
-          <template slot="footer">
-            <a href="#">See All Messages</a>
+            <li class="dropdown-footer">
+              <a href="#">See All Messages</a>
+            </li>
           </template>
         </NavDropdown>
+
         <NavDropdown :icon="'bell'" :desc="'Notifications'"
           :classes="messageDropdownClasses" ref="notifDropdown"
           @dropdown-opened="closeOpenedDropdown">
@@ -44,27 +48,31 @@
             <span class="label label-danger">{{ unreadMessages }}</span>
           </template>
 
-          <template slot="header" v-if="unreadMessages != 0">
-            You have {{ unreadMessages }} unread notification(s)
-          </template>
-          <template slot="header" v-else>
-            <h3 style="margin: 0">Messages</h3>
-          </template>
+          <template slot="dropdown-content">
+            <li class="dropdown-header" v-if="unreadMessages != 0">
+              You have {{ unreadMessages }} unread notification(s)
+            </li>
+            <li class="dropdown-header" v-else>
+              <h3 style="margin: 0">Messages</h3>
+            </li>
 
-          <template slot="body">
-            <ul class="cons">
-              <Conversation
-                v-for="item in conversations"
-                :key="item.id" :item="item"
-                @increment-unseen="unreadMessages++"
-                @decrement-unseen="unreadMessages--"
-              ></Conversation>
-            </ul>
-          </template>
-          <template slot="footer">
-            <a href="#">See All Messages</a>
+            <li class="dropdown-body">
+              <ul class="cons">
+                <Conversation
+                  v-for="item in conversations"
+                  :key="item.id" :item="item"
+                  @increment-unseen="unreadMessages++"
+                  @decrement-unseen="unreadMessages--"
+                ></Conversation>
+              </ul>
+            </li>
+
+            <li class="dropdown-footer">
+              <a href="#">See All Messages</a>
+            </li>
           </template>
         </NavDropdown>
+
         <li class="nav-item">
           <a href="#" class="nav-link">
             <fa icon="bell"></fa>
@@ -99,9 +107,12 @@ import conversations from '@/data/conversations'
 export default class Navbar extends Vue {
   @Ref() messageDropdown !: NavDropdown
   @Ref() notifDropdown !: NavDropdown
+
   navDropdown!: NavDropdown[]
   conversations = conversations
   unreadMessages = 0
+  conversationBodyHeight = 'auto'
+
   messageDropdownClasses = [
     'message-dropdown',
     'menu-center-sm',

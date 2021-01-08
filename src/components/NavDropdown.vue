@@ -6,15 +6,7 @@
       <slot name="label"></slot>
     </a>
     <ul class="dropdown-menu" :class="classes">
-      <li class="dropdown-header" v-if="$slots.header">
-        <slot name="header"></slot>
-      </li>
-      <li class="dropdown-body" v-if="$slots.body">
-        <slot name="body"></slot>
-      </li>
-      <li class="dropdown-footer" v-if="$slots.footer">
-        <slot name="footer"></slot>
-      </li>
+      <slot name="dropdown-content"></slot>
     </ul>
   </li>
 </template>
