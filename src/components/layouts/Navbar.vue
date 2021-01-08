@@ -24,16 +24,22 @@
               <h3 style="margin: 0">Messages</h3>
             </li>
 
-            <li class="dropdown-body">
-              <ul class="cons">
-                <Conversation
-                  v-for="item in conversations"
-                  :key="item.id" :item="item"
-                  @increment-unseen="unreadMessages++"
-                  @decrement-unseen="unreadMessages--"
-                ></Conversation>
-              </ul>
-            </li>
+            <overlay-scrollbars
+              :options="{
+                className: 'os-theme-dark',
+                scrollbars: {autoHide: 'leave', autoHideDelay: 200}
+              }">
+              <li class="dropdown-body" :style="{ height: conversationBodyHeight }">
+                <ul class="cons">
+                  <Conversation
+                    v-for="item in conversations"
+                    :key="item.id" :item="item"
+                    @increment-unseen="unreadMessages++"
+                    @decrement-unseen="unreadMessages--"
+                  ></Conversation>
+                </ul>
+              </li>
+            </overlay-scrollbars>
 
             <li class="dropdown-footer">
               <a href="#">See All Messages</a>
@@ -49,11 +55,9 @@
           </template>
 
           <template slot="dropdown-content">
-            <li class="dropdown-header" v-if="unreadMessages != 0">
-              You have {{ unreadMessages }} unread notification(s)
-            </li>
-            <li class="dropdown-header" v-else>
-              <h3 style="margin: 0">Messages</h3>
+            <li class="dropdown-header">
+              <span v-if="unreadMessages != 0">You have {{ unreadMessages }} unread notification(s)</span>
+              <h3 style="margin: 0" v-else>Messages</h3>
             </li>
 
             <li class="dropdown-body">
@@ -121,6 +125,7 @@ export default class Navbar extends Vue {
 
   mounted () {
     this.navDropdown = [this.messageDropdown, this.notifDropdown]
+    if (this.conversations.length > 5) this.conversationBodyHeight = '60vh'
   }
 
   closeOpenedDropdown () {
