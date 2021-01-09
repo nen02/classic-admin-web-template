@@ -17,7 +17,7 @@ export default class Main extends Vue {
   @Prop() isSidebarOpen!: boolean
 
   toggleSidebar () {
-    if (window.innerWidth < 768 && this.isSidebarOpen) this.$emit('toggle-sidebar')
+    this.$emit('close-sidebar')
   }
 }
 </script>

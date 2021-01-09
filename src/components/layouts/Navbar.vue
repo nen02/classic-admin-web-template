@@ -1,6 +1,6 @@
 <template>
   <div id="navbar">
-    <a href="#" id="sidebar-toggle" @click.prevent="$emit('toggle-sidebar')">
+    <a href="#" id="sidebar-toggle" @click.prevent="toggleSidebar">
       <fa icon="bars"></fa>
     </a>
     <nav class="navbar-nav">
@@ -12,7 +12,7 @@
 
         <NavDropdown :icon="'envelope'" :desc="'Messages'"
           :classes="messageDropdownClasses" ref="messageDropdown"
-          @dropdown-opened="closeOpenedDropdown">
+          @dropdown-opened="closeOpenedDropdownAndSidebar">
           <template slot="label" v-if="unreadMessages != 0">
             <span class="label label-danger">{{ unreadMessages }}</span>
           </template>
@@ -27,7 +27,7 @@
             <overlay-scrollbars
               :options="{
                 className: 'os-theme-dark',
-                scrollbars: {autoHide: 'leave', autoHideDelay: 200}
+                scrollbars: {autoHide: 'scroll', autoHideDelay: 800}
               }">
               <li class="dropdown-body" :style="{ height: conversationBodyHeight }">
                 <ul class="cons">
@@ -49,7 +49,7 @@
 
         <NavDropdown :icon="'bell'" :desc="'Notifications'"
           :classes="messageDropdownClasses" ref="notifDropdown"
-          @dropdown-opened="closeOpenedDropdown">
+          @dropdown-opened="closeOpenedDropdownAndSidebar">
           <template slot="label" v-if="unreadMessages != 0">
             <span class="label label-danger">{{ unreadMessages }}</span>
           </template>
@@ -115,7 +115,7 @@ export default class Navbar extends Vue {
   navDropdown!: NavDropdown[]
   conversations = conversations
   unreadMessages = 0
-  conversationBodyHeight!: string
+  conversationBodyHeight = 'auto'
 
   messageDropdownClasses = [
     'message-dropdown',
@@ -134,11 +134,25 @@ export default class Navbar extends Vue {
   }
 
   updateConversationBodyHeight () {
-    this.conversationBodyHeight = this.conversations.length > 5 ? '60vh' : 'auto'
+    this.conversationBodyHeight = this.conversations.length > 5 ? '70vh' : 'auto'
   }
 
   closeOpenedDropdown () {
     for (const current of this.navDropdown) current.closeDropdown()
+  }
+
+  closeSidebar () {
+    this.$emit('close-sidebar')
+  }
+
+  closeOpenedDropdownAndSidebar () {
+    this.closeOpenedDropdown()
+    this.closeSidebar()
+  }
+
+  toggleSidebar () {
+    if (window.innerWidth < 768) this.closeOpenedDropdown()
+    this.$emit('toggle-sidebar')
   }
 }
 </script>

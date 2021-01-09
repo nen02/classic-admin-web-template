@@ -1,12 +1,15 @@
 <template>
   <div id="app">
     <header>
-      <Navbar @toggle-sidebar="isSidebarOpen = !isSidebarOpen"></Navbar>
+      <Navbar
+        @toggle-sidebar="isSidebarOpen = !isSidebarOpen"
+        @close-sidebar="closeSidebarOnMobileDevice"
+      ></Navbar>
       <Sidebar :isSidebarOpen="isSidebarOpen"></Sidebar>
     </header>
     <Main
       :isSidebarOpen='isSidebarOpen'
-      @toggle-sidebar="isSidebarOpen = !isSidebarOpen"
+      @close-sidebar="closeSidebarOnMobileDevice"
     ></Main>
     <footer></footer>
   </div>
@@ -27,5 +30,9 @@ import Main from '@/components/layouts/Main.vue'
 })
 export default class App extends Vue {
   isSidebarOpen = false
+
+  closeSidebarOnMobileDevice () {
+    if (window.innerWidth < 768) this.isSidebarOpen = false
+  }
 }
 </script>
